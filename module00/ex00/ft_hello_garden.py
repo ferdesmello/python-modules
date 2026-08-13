@@ -6,9 +6,9 @@
 #    By: ferde-so <ferde-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/13 01:45:25 by ferde-so          #+#    #+#              #
-#    Updated: 2026/08/13 01:46:30 by ferde-so         ###   ########.fr        #
+#    Updated: 2026/08/13 02:52:35 by ferde-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 def ft_hello_garden():
-	print("Hello, Garden Community!")
+    print("Hello, Garden Community!")
