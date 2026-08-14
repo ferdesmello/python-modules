@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_seed_inventory.py                               :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ferde-so <ferde-so@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/08/13 02:10:10 by ferde-so          #+#    #+#              #
-#    Updated: 2026/08/13 02:54:05 by ferde-so         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 def ft_seed_inventory(seed_type: str, quantity: int, unit: str) -> None:
     if unit == "packets":
         print(f"{seed_type} seeds: {quantity} {unit} available")
