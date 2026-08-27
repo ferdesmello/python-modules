@@ -1,5 +1,5 @@
 class GardenPlant:
-    def __init__(self, p_name: str, p_height: int, p_age: int) -> None:
+    def __init__(self, p_name: str, p_height: float, p_age: int) -> None:
         self.p_name = p_name
         self.p_height = p_height
         self.p_age = p_age
@@ -11,7 +11,7 @@ class GardenPlant:
         elif self.p_name.lower() == "oak":
             self.p_growth = 1.0
         elif self.p_name.lower() == "fern":
-            self.p_growth = 0.5
+            self.p_growth = 1.5
 
     def show(self) -> None:
         print(f"{self.p_name.capitalize()}: \

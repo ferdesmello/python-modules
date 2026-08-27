@@ -1,8 +1,11 @@
 class GardenPlant:
-    def __init__(self, p_name: str, p_height: int, p_age: int) -> None:
-        self.p_name = p_name
-        self.p_height = p_height
-        self.p_age = p_age
+    def __init__(self,
+                 init_name: str,
+                 init_height: float,
+                 init_age: int) -> None:
+        self.p_name = init_name
+        self.p_height = init_height
+        self.p_age = init_age
         self.p_growth = 1.5
         if self.p_name.lower() == "cactus":
             self.p_growth = 0.5

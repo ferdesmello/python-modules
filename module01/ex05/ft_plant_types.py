@@ -1,5 +1,8 @@
 class GardenPlant:
-    def __init__(self, init_name: str, init_height: int, init_age: int) -> None:
+    def __init__(self,
+                 init_name: str,
+                 init_height: float,
+                 init_age: float) -> None:
         self._p_name = init_name
         self._p_height = init_height
         self._p_age = init_age
@@ -11,7 +14,7 @@ class GardenPlant:
         elif self._p_name.lower() == "oak":
             self._p_growth = 1.0
         elif self._p_name.lower() == "fern":
-            self._p_growth = 0.5
+            self._p_growth = 1.5
 
     def show(self) -> None:
         print(f"{self._p_name.capitalize()}: \
@@ -28,40 +31,43 @@ class GardenPlant:
             self.show()
         print(f"Growth this week: {days * self._p_growth}cm")
 
-    def set_height(self, height: int) -> None:
-        if height < 0:
-            print(f"{self._p_name.capitalize()}: Error, height can't be negative.")
+    def set_height(self, new_height: float) -> None:
+        if new_height < 0:
+            print(f"{self._p_name.capitalize()}: \
+Error, height can't be negative.")
             print("Height update rejected")
         else:
             print(f"Height updated: {self._p_height}cm")
-            self._p_height = height
+            self._p_height = new_height
 
-    def set_age(self, age: int) -> None:
-        if age < 0:
-            print(f"{self._p_name.capitalize()}: Error, age can't be negative.")
+    def set_age(self, new_age: int) -> None:
+        if new_age < 0:
+            print(f"{self._p_name.capitalize()}: \
+Error, age can't be negative.")
             print("Age update rejected")
         else:
             print(f"Age updated: {self._p_age} days")
-            self._p_age = age
+            self._p_age = new_age
 
-    def get_height(self) -> int:
+    def get_height(self) -> float:
         return self._p_height
 
-    def get_age(self) -> int:
+    def get_age(self) -> float:
         return self._p_age
-    def get_color(self) -> str:
-        return self.color
 
 
 class Flower(GardenPlant):
-    def __init__(self, 
-                 init_name: str, 
-                 init_height: int, 
-                 init_age: int, 
+    def __init__(self,
+                 init_name: str,
+                 init_height: float,
+                 init_age: float,
                  color: str) -> None:
         super().__init__(init_name, init_height, init_age)
         self._color = color
         self._blown = False
+
+    def get_color(self) -> str:
+        return self._color
 
     def bloom(self) -> None:
         if not self._blown:
@@ -77,11 +83,11 @@ class Flower(GardenPlant):
 
 
 class Tree(GardenPlant):
-    def __init__(self, 
-                 init_name: str, 
-                 init_height: int, 
-                 init_age: int, 
-                 trunk_diameter: str) -> None:
+    def __init__(self,
+                 init_name: str,
+                 init_height: float,
+                 init_age: float,
+                 trunk_diameter: float) -> None:
         super().__init__(init_name, init_height, init_age)
         self._trunk_diameter = trunk_diameter
         self._shade = False
@@ -102,14 +108,15 @@ shade of {self._shade_long}cm long and {self._shade_wide}cm wide.")
 
 
 class Vegetable(GardenPlant):
-    def __init__(self, 
-                 init_name: str, 
-                 init_height: int, 
-                 init_age: int, 
-                 harvest_season: str) -> None:
+    def __init__(self,
+                 init_name: str,
+                 init_height: float,
+                 init_age: float,
+                 harvest_season: str,
+                 nutritional_value: float = 0) -> None:
         super().__init__(init_name, init_height, init_age)
         self._harvest_season = harvest_season
-        self._nutritional_value = 0
+        self._nutritional_value = nutritional_value
 
     def grow(self) -> None:
         super().grow()
@@ -120,7 +127,7 @@ class Vegetable(GardenPlant):
 
     def show(self) -> None:
         super().show()
-        print(f" Harvest Season: {self._harvest_season}")
+        print(f" Harvest Season: {self._harvest_season.capitalize()}")
         print(f" Nutritional Value: {self._nutritional_value}")
 
 

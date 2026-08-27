@@ -1,5 +1,8 @@
 class GardenPlant:
-    def __init__(self, init_name: str, init_height: int, init_age: int) -> None:
+    def __init__(self,
+                 init_name: str,
+                 init_height: float,
+                 init_age: int) -> None:
         self._p_name = init_name
         self._p_height = init_height
         self._p_age = init_age
@@ -28,7 +31,7 @@ class GardenPlant:
             self.show()
         print(f"Growth this week: {days * self._p_growth}cm")
 
-    def set_height(self, height: int) -> None:
+    def set_height(self, height: float) -> None:
         if height < 0:
             print(f"{self._p_name}: Error, height can't be negative.")
             print("Height update rejected")
@@ -44,7 +47,7 @@ class GardenPlant:
             print(f"Age updated: {self._p_age} days")
             self._p_age = age
 
-    def get_height(self) -> int:
+    def get_height(self) -> float:
         return self._p_height
 
     def get_age(self) -> int:
@@ -54,11 +57,11 @@ class GardenPlant:
 def main():
     garden = [
         GardenPlant("Rose", 25.0, 30),
-        #GardenPlant("Sunflower", 80, 45),
-        #GardenPlant("Oak", 200, 1000),
-        #GardenPlant("Cactus", 15, 120),
-        #GardenPlant("Fern", 20, 300),
-        #GardenPlant("Palmtree", 100, 50)
+        # GardenPlant("Sunflower", 80, 45),
+        # GardenPlant("Oak", 200, 1000),
+        # GardenPlant("Cactus", 15, 120),
+        # GardenPlant("Fern", 20, 300),
+        # GardenPlant("Palmtree", 100, 50)
     ]
 
     print("=== Garden Security System ===")
@@ -74,6 +77,7 @@ def main():
     garden[0].set_age(-35)
     print("Current state: ", end="")
     garden[0].show()
+
 
 if __name__ == "__main__":
     main()
