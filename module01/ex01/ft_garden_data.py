@@ -1,10 +1,10 @@
 class GardenPlant:
-    def __init__(self, name: str, height: int, age: int):
+    def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name.capitalize()}: \
 {self.height}cm, {self.age} days old")
 

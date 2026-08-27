@@ -8,6 +8,10 @@ class GardenPlant:
             self.p_growth = 0.5
         elif self.p_name.lower() == "sunflower":
             self.p_growth = 2.0
+        elif self.p_name.lower() == "oak":
+            self.p_growth = 1.0
+        elif self.p_name.lower() == "fern":
+            self.p_growth = 0.5
 
     def show(self) -> None:
         print(f"{self.p_name.capitalize()}: \
@@ -28,13 +32,17 @@ class GardenPlant:
 def main():
     garden = [
         GardenPlant("Rose", 25.0, 30),
-        # GardenPlant("Sunflower", 80, 45),
-        # GardenPlant("Cactus", 15, 120)
+        GardenPlant("Sunflower", 80, 45),
+        GardenPlant("Oak", 200, 1000),
+        GardenPlant("Cactus", 15, 120),
+        GardenPlant("Fern", 20, 300),
+        GardenPlant("Palmtree", 100, 50)
     ]
 
-    print("=== Garden Plant Growth ===")
-    garden[0].show()
-    garden[0].age(7)
+    print("=== Plant Factory Output ===")
+    for plant in garden:
+        print("Created: ", end="")
+        plant.show()
 
 
 if __name__ == "__main__":
