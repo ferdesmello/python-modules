@@ -29,7 +29,7 @@ class GardenPlant:
         print(f"Growth this week: {days * self.p_growth}cm")
 
 
-def main():
+def main() -> None:
     garden = [
         GardenPlant("Rose", 25.0, 30),
         GardenPlant("Sunflower", 80, 45),

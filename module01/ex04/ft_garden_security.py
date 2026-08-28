@@ -54,7 +54,7 @@ class GardenPlant:
         return self._p_age
 
 
-def main():
+def main() -> None:
     garden = [
         GardenPlant("Rose", 25.0, 30),
         # GardenPlant("Sunflower", 80, 45),

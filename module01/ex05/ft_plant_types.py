@@ -131,27 +131,25 @@ class Vegetable(GardenPlant):
         print(f" Nutritional Value: {self._nutritional_value}")
 
 
-def main():
-    garden = [
-        Flower("Rose", 25.0, 30, "Red"),
-        Tree("Oak", 80, 45, 10.0),
-        Vegetable("Carrot", 10, 2, "Fall"),
-    ]
+def main() -> None:
+    plant1 = Flower("Rose", 25.0, 30, "Red")
+    plant2 = Tree("Oak", 80, 45, 10.0)
+    plant3 = Vegetable("Carrot", 10, 2, "Fall")
 
     print("=== Garden Plant Types ===")
     print("=== Flower")
-    garden[0].show()
-    garden[0].bloom()
-    garden[0].show()
+    plant1.show()
+    plant1.bloom()
+    plant1.show()
 
     print("\n=== Tree")
-    garden[1].show()
-    garden[1].produce_shade()
+    plant2.show()
+    plant2.produce_shade()
 
     print("\n=== Vegetable")
-    garden[2].show()
-    garden[2].age(5)
-    garden[2].show()
+    plant3.show()
+    plant3.age(5)
+    plant3.show()
 
 
 if __name__ == "__main__":

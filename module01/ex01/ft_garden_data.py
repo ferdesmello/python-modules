@@ -9,7 +9,7 @@ class GardenPlant:
 {self.height}cm, {self.age} days old")
 
 
-def main():
+def main() -> None:
     garden = [
         GardenPlant("Rose", 25, 30),
         GardenPlant("Sunflower", 80, 45),
