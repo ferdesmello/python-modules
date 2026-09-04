@@ -1,11 +1,11 @@
-class GardenPlant:
+class Plant:
     def __init__(self,
                  init_name: str,
                  init_height: float,
                  init_age: int) -> None:
         self._p_name = init_name
-        self._p_height = init_height
-        self._p_age = init_age
+        self._p_height = 0.0
+        self._p_age = 0
         self._p_growth = 1.5
         if self._p_name.lower() == "cactus":
             self._p_growth = 0.5
@@ -15,6 +15,22 @@ class GardenPlant:
             self._p_growth = 1.0
         elif self._p_name.lower() == "fern":
             self._p_growth = 0.5
+
+        if init_height < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, height can't be negative.")
+            print("Height update rejected")
+            self._p_height = 0.0
+        else:
+            self._p_height = init_height
+
+        if init_age < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, age can't be negative.")
+            print("Age update rejected")
+            self._p_age = 0
+        else:
+            self._p_age = init_age
 
     def show(self) -> None:
         print(f"{self._p_name.capitalize()}: \
@@ -31,21 +47,23 @@ class GardenPlant:
             self.show()
         print(f"Growth this week: {days * self._p_growth}cm")
 
-    def set_height(self, height: float) -> None:
-        if height < 0:
-            print(f"{self._p_name}: Error, height can't be negative.")
+    def set_height(self, new_height: float) -> None:
+        if new_height < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, height can't be negative.")
             print("Height update rejected")
         else:
+            self._p_height = new_height
             print(f"Height updated: {self._p_height}cm")
-            self._p_height = height
 
-    def set_age(self, age: int) -> None:
-        if age < 0:
-            print(f"{self._p_name}: Error, age can't be negative.")
+    def set_age(self, new_age: int) -> None:
+        if new_age < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, age can't be negative.")
             print("Age update rejected")
         else:
+            self._p_age = new_age
             print(f"Age updated: {self._p_age} days")
-            self._p_age = age
 
     def get_height(self) -> float:
         return self._p_height
@@ -56,25 +74,27 @@ class GardenPlant:
 
 def main() -> None:
     garden = [
-        GardenPlant("Rose", 25.0, 30),
-        # GardenPlant("Sunflower", 80, 45),
-        # GardenPlant("Oak", 200, 1000),
-        # GardenPlant("Cactus", 15, 120),
-        # GardenPlant("Fern", 20, 300),
-        # GardenPlant("Palmtree", 100, 50)
+        Plant("Rose", 25.0, 30),
+        # Plant("Sunflower", 80, 45),
+        # Plant("Oak", 200, 1000),
+        # Plant("Cactus", 15, 120),
+        # Plant("Fern", 20, 300),
+        # Plant("Palmtree", 100, 50)
     ]
 
     print("=== Garden Security System ===")
     print("Plant created: ", end="")
     garden[0].show()
+    print()
 
     garden[0].set_height(50)
     garden[0].set_age(55)
-    print("Current state: ", end="")
-    garden[0].show()
+    print()
 
     garden[0].set_height(-30)
     garden[0].set_age(-35)
+    print()
+
     print("Current state: ", end="")
     garden[0].show()
 

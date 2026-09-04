@@ -26,8 +26,8 @@ class Plant:
                  init_height: float,
                  init_age: float) -> None:
         self._p_name = init_name
-        self._p_height = init_height
-        self._p_age = init_age
+        self._p_height: float = 0.0
+        self._p_age: float = 0.0
         self._p_stats = self._Stats()
 
         self._p_growth = 1.5
@@ -38,7 +38,23 @@ class Plant:
         elif self._p_name.lower() == "oak":
             self._p_growth = 1.0
         elif self._p_name.lower() == "fern":
-            self._p_growth = 1.5
+            self._p_growth = 0.5
+
+        if init_height < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, height can't be negative.")
+            print("Height update rejected")
+            self._p_height = 0.0
+        else:
+            self._p_height = init_height
+
+        if init_age < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, age can't be negative.")
+            print("Age update rejected")
+            self._p_age = 0.0
+        else:
+            self._p_age = init_age
 
     def show(self) -> None:
         self._p_stats.log_show()
@@ -158,15 +174,19 @@ class Tree(Plant):
                  trunk_diameter: float) -> None:
         super().__init__(init_name, init_height, init_age)
         self._trunk_diameter = trunk_diameter
-        self._shade_long = 0
-        self._shade_wide = 0
+        self._shade: bool = False
+        self._shade_long: float = 0.0
+        self._shade_wide: float = 0.0
         self._p_stats = self._Stats()
 
     def produce_shade(self) -> None:
-        self._shade = True
-        self._p_stats.log_shade()
-        self._shade_long = 200
-        self._shade_wide = 5
+        if not self._shade:
+            self._shade = True
+            self._shade_long = 200.0
+            self._shade_wide = 5.0
+            print(f"Tree {self._p_name.capitalize()} now produces a "
+                  f"shade of {round(self._shade_long, 1)}cm long and "
+                  f"{round(self._shade_wide, 1)}cm wide.")
 
     def show(self) -> None:
         super().show()
@@ -218,16 +238,15 @@ def main() -> None:
     display_plant_stats(plant1)
 
     print("\n=== Tree")
-    plant2 = Tree("Oak", 80, 45, 10.0)
+    plant2 = Tree("Oak", 100.0, 45, 10.0)
     plant2.show()
     display_plant_stats(plant2)
     plant2.produce_shade()
     display_plant_stats(plant2)
 
     print("\n=== Seed")
-    plant3 = Seed("Sunflower", 80, 20, "Yellow")
+    plant3 = Seed("Sunflower", 80.0, 20, "Yellow")
     plant3.show()
-    display_plant_stats(plant3)
     plant3.grow()
     plant3.age(5)
     plant3.bloom()

@@ -1,8 +1,11 @@
-class GardenPlant:
-    def __init__(self, p_name: str, p_height: float, p_age: int) -> None:
-        self.p_name = p_name
-        self.p_height = p_height
-        self.p_age = p_age
+class Plant:
+    def __init__(self,
+                 start_name: str,
+                 start_height: float,
+                 start_age: int) -> None:
+        self.p_name = start_name
+        self.p_height = start_height
+        self.p_age = start_age
         self.p_growth = 1.5
         if self.p_name.lower() == "cactus":
             self.p_growth = 0.5
@@ -31,12 +34,12 @@ class GardenPlant:
 
 def main() -> None:
     garden = [
-        GardenPlant("Rose", 25.0, 30),
-        GardenPlant("Sunflower", 80, 45),
-        GardenPlant("Oak", 200, 1000),
-        GardenPlant("Cactus", 15, 120),
-        GardenPlant("Fern", 20, 300),
-        GardenPlant("Palmtree", 100, 50)
+        Plant("Rose", 25.0, 30),
+        Plant("Sunflower", 80, 45),
+        Plant("Oak", 200, 1000),
+        Plant("Cactus", 15, 120),
+        Plant("Fern", 20, 300),
+        Plant("Palmtree", 100, 50)
     ]
 
     print("=== Plant Factory Output ===")

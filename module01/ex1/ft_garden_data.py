@@ -1,4 +1,4 @@
-class GardenPlant:
+class Plant:
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
         self.height = height
@@ -11,9 +11,9 @@ class GardenPlant:
 
 def main() -> None:
     garden = [
-        GardenPlant("Rose", 25, 30),
-        GardenPlant("Sunflower", 80, 45),
-        GardenPlant("Cactus", 15, 120)
+        Plant("Rose", 25, 30),
+        Plant("Sunflower", 80, 45),
+        Plant("Cactus", 15, 120)
     ]
 
     print("=== Garden Plant Registry ===")

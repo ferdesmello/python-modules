@@ -1,11 +1,11 @@
-class GardenPlant:
+class Plant:
     def __init__(self,
                  init_name: str,
                  init_height: float,
                  init_age: float) -> None:
         self._p_name = init_name
-        self._p_height = init_height
-        self._p_age = init_age
+        self._p_height = 0.0
+        self._p_age = 0.0
         self._p_growth = 1.5
         if self._p_name.lower() == "cactus":
             self._p_growth = 0.5
@@ -14,40 +14,51 @@ class GardenPlant:
         elif self._p_name.lower() == "oak":
             self._p_growth = 1.0
         elif self._p_name.lower() == "fern":
-            self._p_growth = 1.5
+            self._p_growth = 0.5
+
+        if init_height < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, height can't be negative.")
+            print("Height update rejected")
+            self._p_height = 0.0
+        else:
+            self._p_height = init_height
+
+        if init_age < 0:
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, age can't be negative.")
+            print("Age update rejected")
+            self._p_age = 0.0
+        else:
+            self._p_age = init_age
 
     def show(self) -> None:
         print(f"{self._p_name.capitalize()}: \
 {round(self._p_height, 1)}cm, {self._p_age} days old")
 
-    def grow(self) -> None:
-        self._p_height += self._p_growth
+    def grow(self, days: int) -> None:
+        self._p_height += self._p_growth * days
 
     def age(self, days: int) -> None:
-        for day in range(1, days + 1):
-            print(f"=== Day {day} ===")
-            self._p_age += 1
-            self.grow()
-            self.show()
-        print(f"Growth this week: {days * self._p_growth}cm")
+        self._p_age += days
 
     def set_height(self, new_height: float) -> None:
         if new_height < 0:
-            print(f"{self._p_name.capitalize()}: \
-Error, height can't be negative.")
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, height can't be negative.")
             print("Height update rejected")
         else:
-            print(f"Height updated: {self._p_height}cm")
             self._p_height = new_height
+            print(f"Height updated: {self._p_height}cm")
 
     def set_age(self, new_age: int) -> None:
         if new_age < 0:
-            print(f"{self._p_name.capitalize()}: \
-Error, age can't be negative.")
+            print(f"{self._p_name.capitalize()}: "
+                  f"Error, age can't be negative.")
             print("Age update rejected")
         else:
-            print(f"Age updated: {self._p_age} days")
             self._p_age = new_age
+            print(f"Age updated: {self._p_age} days")
 
     def get_height(self) -> float:
         return self._p_height
@@ -56,7 +67,7 @@ Error, age can't be negative.")
         return self._p_age
 
 
-class Flower(GardenPlant):
+class Flower(Plant):
     def __init__(self,
                  init_name: str,
                  init_height: float,
@@ -79,10 +90,10 @@ class Flower(GardenPlant):
         if self._blown:
             print(f" {self._p_name.capitalize()} is blooming beautifully!")
         else:
-            print(f" {self._p_name.capitalize()} has not bloomed yet.")
+            print(f" {self._p_name.capitalize()} has not bloomed yet")
 
 
-class Tree(GardenPlant):
+class Tree(Plant):
     def __init__(self,
                  init_name: str,
                  init_height: float,
@@ -90,24 +101,25 @@ class Tree(GardenPlant):
                  trunk_diameter: float) -> None:
         super().__init__(init_name, init_height, init_age)
         self._trunk_diameter = trunk_diameter
-        self._shade = False
-        self._shade_long = 0
-        self._shade_wide = 0
+        self._shade: bool = False
+        self._shade_long: float = 0.0
+        self._shade_wide: float = 0.0
 
     def produce_shade(self) -> None:
         if not self._shade:
             self._shade = True
-            self._shade_long = 200
-            self._shade_wide = 5
-            print(f"{self._p_name.capitalize()} now produces a \
-shade of {self._shade_long}cm long and {self._shade_wide}cm wide.")
+            self._shade_long = 200.0
+            self._shade_wide = 5.0
+            print(f"Tree {self._p_name.capitalize()} now produces a "
+                  f"shade of {round(self._shade_long, 1)}cm long and "
+                  f"{round(self._shade_wide, 1)}cm wide.")
 
     def show(self) -> None:
         super().show()
         print(f" Trunk Diameter: {round(self._trunk_diameter, 1)}cm")
 
 
-class Vegetable(GardenPlant):
+class Vegetable(Plant):
     def __init__(self,
                  init_name: str,
                  init_height: float,
@@ -118,9 +130,9 @@ class Vegetable(GardenPlant):
         self._harvest_season = harvest_season
         self._nutritional_value = nutritional_value
 
-    def grow(self) -> None:
-        super().grow()
-        self._nutritional_value += 2.5
+    def grow(self, days: int) -> None:
+        super().grow(days)
+        self._nutritional_value += self._nutritional_value + 1.5 * days
 
     def age(self, days: int) -> None:
         super().age(days)
@@ -128,13 +140,13 @@ class Vegetable(GardenPlant):
     def show(self) -> None:
         super().show()
         print(f" Harvest Season: {self._harvest_season.capitalize()}")
-        print(f" Nutritional Value: {self._nutritional_value}")
+        print(f" Nutritional Value: {round(self._nutritional_value, 1)}")
 
 
 def main() -> None:
     plant1 = Flower("Rose", 25.0, 30, "Red")
-    plant2 = Tree("Oak", 80, 45, 10.0)
-    plant3 = Vegetable("Carrot", 10, 2, "Fall")
+    plant2 = Tree("Oak", 80.0, 45, 10.0)
+    plant3 = Vegetable("Carrot", 10.0, 2, "Fall")
 
     print("=== Garden Plant Types ===")
     print("=== Flower")
@@ -148,7 +160,8 @@ def main() -> None:
 
     print("\n=== Vegetable")
     plant3.show()
-    plant3.age(5)
+    plant3.grow(20)
+    plant3.age(20)
     plant3.show()
 
 

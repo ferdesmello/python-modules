@@ -1,4 +1,4 @@
-class GardenPlant:
+class Plant:
     def __init__(self,
                  init_name: str,
                  init_height: float,
@@ -30,9 +30,9 @@ class GardenPlant:
 
 def main() -> None:
     garden = [
-        GardenPlant("Rose", 25.0, 30),
-        # GardenPlant("Sunflower", 80, 45),
-        # GardenPlant("Cactus", 15, 120)
+        Plant("Rose", 25.0, 30),
+        # Plant("Sunflower", 80, 45),
+        # Plant("Cactus", 15, 120)
     ]
 
     print("=== Garden Plant Growth ===")
