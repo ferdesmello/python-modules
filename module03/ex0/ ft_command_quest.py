@@ -1,5 +1,6 @@
 import sys
 
+
 def main() -> None:
     print("=== Player Score Analytics ===")
     print(f"Program name:{sys.argv[0]}")

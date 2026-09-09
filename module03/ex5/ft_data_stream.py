@@ -1,8 +1,9 @@
 import random
 import typing
 
+
 def gen_event(
-        actions: list[str], 
+        actions: list[str],
         names: list[str]
         ) -> typing.Generator[tuple[str, str], None, None]:
     while True:
@@ -14,22 +15,22 @@ def gen_event(
 def consume_event(
         ten_list: list[tuple[str, str]]
         ) -> typing.Generator[tuple[str, str], None, None]:
-        while ten_list:
-            index = random.randint(0, len(ten_list) - 1)
-            item = ten_list.pop(index)
-            yield item
+    while ten_list:
+        index = random.randint(0, len(ten_list) - 1)
+        item = ten_list.pop(index)
+        yield item
 
 
 def main() -> None:
     actions = [
-        'run', 
+        'run',
         'eat',
         'sleep',
-        'grab', 
-        'move', 
-        'climb', 
-        'swim', 
-        'release', 
+        'grab',
+        'move',
+        'climb',
+        'swim',
+        'release',
         'jump',
         'attack',
         'defend',
@@ -47,14 +48,14 @@ def main() -> None:
         'find'
         ]
     names = [
-        'Alice', 
-        'Bob', 
-        'Charlie', 
+        'Alice',
+        'Bob',
+        'Charlie',
         'Dylan',
         'Edna',
         'Fiona'
         ]
-    
+
     print("=== Game Data Stream Processor ===")
 
     stream = gen_event(actions, names)

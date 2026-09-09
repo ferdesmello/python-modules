@@ -1,5 +1,6 @@
 import sys
 
+
 def main() -> None:
     print("=== Player Score Analytics ===")
     score_list: list[int] = []

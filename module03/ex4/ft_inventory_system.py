@@ -1,10 +1,11 @@
 import sys
 
-def inv_max_item(inv_dict: dict[str, int]) -> tuple[str, int] | None:
-    if not inv_dict:
-        return None
 
-    max_item = None
+def inv_max_item(inv_dict: dict[str, int]) -> tuple[str, int]:
+    if not inv_dict:
+        raise ValueError("Inventory dictionary is empty.")
+
+    max_item = ""
     max_quantity = -1
     for item, quantity in inv_dict.items():
         if quantity > max_quantity:
@@ -14,11 +15,11 @@ def inv_max_item(inv_dict: dict[str, int]) -> tuple[str, int] | None:
     return max_item, max_quantity
 
 
-def inv_min_item(inv_dict: dict[str, int]) -> tuple[str, int] | None:
+def inv_min_item(inv_dict: dict[str, int]) -> tuple[str, int]:
     if not inv_dict:
-        return None
+        raise ValueError("Inventory dictionary is empty.")
 
-    min_item = None
+    min_item = ""
     min_quantity = 1000000
     for item, quantity in inv_dict.items():
         if quantity < min_quantity:
@@ -46,8 +47,8 @@ def load_items() -> dict[str, int]:
                     inv_dict[key_value_pair[0]] = int(key_value_pair[1])
                 except ValueError:
                     print(f"Quantity error for '{key_value_pair[0]}': "
-                            f"invalid literal for int() with base 10: "
-                            f"'{key_value_pair[1]}' for argument '{arg}'")
+                          f"invalid literal for int() with base 10: "
+                          f"'{key_value_pair[1]}' for argument '{arg}'")
     return inv_dict
 
 

@@ -1,5 +1,6 @@
 import math
 
+
 def get_player_pos() -> tuple[float, float, float]:
 
     coord_str: list[str] = []
@@ -9,15 +10,15 @@ def get_player_pos() -> tuple[float, float, float]:
                                "in format 'x,y,z': ")
         coord_str = input_str.split(",")
         try:
-           coord_str = input_str.split(",")
-           if calc_size(coord_str) != 3:
-               raise IndexError
-           for coordinate in coord_str:
-               coord_float.append(float(coordinate))
-           return (coord_float[0], coord_float[1], coord_float[2])
+            coord_str = input_str.split(",")
+            if calc_size(coord_str) != 3:
+                raise IndexError
+            for coordinate in coord_str:
+                coord_float.append(float(coordinate))
+            return (coord_float[0], coord_float[1], coord_float[2])
 
         except IndexError:
-            print(f"Invalid syntax")
+            print("Invalid syntax")
             coord_str.clear()
             coord_float.clear()
 
@@ -28,18 +29,19 @@ def get_player_pos() -> tuple[float, float, float]:
                   f"'{coord_str[calc_size(coord_float)]}'")
             coord_str.clear()
             coord_float.clear()
+    return (0.0, 0.0, 0.0)
 
 
-def calc_size(coord_list: list[float]) -> float:
+def calc_size(coord_list: list[float] | list[str]) -> int:
     size = 0
     for _ in coord_list:
-        size +=1;
+        size += 1
     return size
 
 
-def calc_distance(x1: float, 
-                  y1: float, 
-                  z1: float, 
+def calc_distance(x1: float,
+                  y1: float,
+                  z1: float,
                   x2: float,
                   y2: float,
                   z2: float) -> float:

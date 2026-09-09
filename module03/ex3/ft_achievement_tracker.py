@@ -1,6 +1,7 @@
 import random
 
-def gen_player_achievements(achievements:set[str]) -> set[str]:
+
+def gen_player_achievements(achievements: set[str]) -> set[str]:
     number = random.randint(5, 10)
     random_elements = random.sample(list(achievements), number)
     return set(random_elements)
@@ -8,18 +9,18 @@ def gen_player_achievements(achievements:set[str]) -> set[str]:
 
 def main() -> None:
     achievements = {
-        'Crafting Genius', 
+        'Crafting Genius',
         'Strategist',
         'World Savior',
-        'Speed Runner', 
-        'Survivor', 
-        'Master Explorer', 
-        'Treasure Hunter', 
-        'Unstoppable', 
-        'First Steps', 
-        'Collector Supreme', 
-        'Untouchable', 
-        'Sharp Mind', 
+        'Speed Runner',
+        'Survivor',
+        'Master Explorer',
+        'Treasure Hunter',
+        'Unstoppable',
+        'First Steps',
+        'Collector Supreme',
+        'Untouchable',
+        'Sharp Mind',
         'Boss Slayer'
         }
     players_names_l = ['Alice', 'Bob', 'Charlie', 'Dylan']
