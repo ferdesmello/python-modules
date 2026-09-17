@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 class GardenError(Exception):
     def __init__(self, message: str = "Unknown garden error") -> None:
         super().__init__(message)
@@ -19,7 +20,7 @@ def test_watering_system(plant_list: list[str]) -> None:
     try:
         for plant in plant_list:
             water_plant(plant)
-    except GardenError as e:
+    except PlantError as e:
         print(f"Caught PlantError: {e}")
         print(".. ending tests and returning to main")
         return

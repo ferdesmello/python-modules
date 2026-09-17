@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 class GardenError(Exception):
     def __init__(self, message: str = "Unknown garden error") -> None:
         super().__init__(message)
@@ -19,7 +20,7 @@ def plant_health(good_health: bool) -> None:
 
 
 def plant_water(liters: int) -> None:
-    if liters < 1:
+    if liters < 5:
         raise WaterError("Not enough water in the tank!")
 
 
