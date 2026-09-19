@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 import sys
 
 
 def main() -> None:
-    print("=== Player Score Analytics ===")
-    print(f"Program name:{sys.argv[0]}")
+    print("=== Command Quest ===")
+    print(f"Program name: {sys.argv[0]}")
     if len(sys.argv) > 1:
         print(f"Arguments received: {len(sys.argv) - 1}")
         i = 1

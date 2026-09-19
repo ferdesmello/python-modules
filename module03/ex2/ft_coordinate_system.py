@@ -1,14 +1,14 @@
+#!/usr/bin/env python3
 import math
 
 
 def get_player_pos() -> tuple[float, float, float]:
-
     coord_str: list[str] = []
     coord_float: list[float] = []
+
     while not coord_float:
         input_str: str = input("Enter new coordinates as floats "
                                "in format 'x,y,z': ")
-        coord_str = input_str.split(",")
         try:
             coord_str = input_str.split(",")
             if calc_size(coord_str) != 3:

@@ -1,14 +1,15 @@
+#!/usr/bin/env python3
 import random
 
 
-def gen_player_achievements(achievements: set[str]) -> set[str]:
+def gen_player_achievements(achievements: list[str]) -> set[str]:
     number = random.randint(5, 10)
     random_elements = random.sample(list(achievements), number)
     return set(random_elements)
 
 
 def main() -> None:
-    achievements = {
+    achievements = [
         'Crafting Genius',
         'Strategist',
         'World Savior',
@@ -22,9 +23,15 @@ def main() -> None:
         'Untouchable',
         'Sharp Mind',
         'Boss Slayer'
-        }
-    players_names_l = ['Alice', 'Bob', 'Charlie', 'Dylan']
-    players_sets_l = []
+        ]
+    players_names_l: list[str] = [
+        'Alice',
+        'Bob',
+        'Charlie',
+        'Dylan',
+        'Eve'
+        ]
+    players_sets_l: list[set[str]] = []
 
     print("=== Achievement Tracker System ===\n")
 
@@ -48,7 +55,8 @@ def main() -> None:
 
         index = players_names_l.index(player_name)
         player_set = players_sets_l[index]
-        unique_to_player = player_set.difference(set().union(*other_players_s))
+        unique_to_player = player_set.difference(set()
+                                                 .union(*other_players_s))
 
         print(f"Only {player_name} has: {unique_to_player}")
 
@@ -57,7 +65,7 @@ def main() -> None:
     for player_name in players_names_l:
         index = players_names_l.index(player_name)
         player_set = players_sets_l[index]
-        missing_to_player = all_distinct.difference(player_set)
+        missing_to_player = set(achievements).difference(player_set)
 
         print(f"{player_name} is missing: {missing_to_player}")
 

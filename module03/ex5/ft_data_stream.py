@@ -1,14 +1,15 @@
+#!/usr/bin/env python3
 import random
 import typing
 
 
 def gen_event(
-        actions: list[str],
-        names: list[str]
+        names: list[str],
+        actions: list[str]
         ) -> typing.Generator[tuple[str, str], None, None]:
     while True:
-        action = random.choice(actions)
         name = random.choice(names)
+        action = random.choice(actions)
         yield (name, action)
 
 
@@ -58,7 +59,7 @@ def main() -> None:
 
     print("=== Game Data Stream Processor ===")
 
-    stream = gen_event(actions, names)
+    stream = gen_event(names, actions)
 
     for i in range(1000):
         name, action = next(stream)

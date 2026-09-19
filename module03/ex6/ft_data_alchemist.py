@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import random
 
 
@@ -19,8 +20,8 @@ def main() -> None:
 
     score_dict = {name: random.randint(10, 1000) for name in all_cap_names}
     average_score = sum(score_dict.values()) / len(score_dict)
-    high_scores = {name: score for name, score in
-                   score_dict.items() if score > average_score}
+    high_scores = {name: score_dict[name] for name in
+                   score_dict.keys() if score_dict[name] > average_score}
 
     print("=== Game Data Alchemist ===\n")
 
