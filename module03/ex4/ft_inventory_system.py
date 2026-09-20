@@ -5,28 +5,24 @@ import sys
 def inv_max_item(inv_dict: dict[str, int]) -> tuple[str, int]:
     if not inv_dict:
         raise ValueError("Inventory dictionary is empty.")
-
     max_item: str = ""
     max_quantity: int = -1
     for item in inv_dict.keys():
         if inv_dict[item] > max_quantity:
             max_quantity = inv_dict[item]
             max_item = item
-
     return max_item, max_quantity
 
 
 def inv_min_item(inv_dict: dict[str, int]) -> tuple[str, int]:
     if not inv_dict:
         raise ValueError("Inventory dictionary is empty.")
-
     min_item: str = ""
     min_quantity: int = 1000000
     for item in inv_dict.keys():
         if inv_dict[item] < min_quantity:
             min_quantity = inv_dict[item]
             min_item = item
-
     return min_item, min_quantity
 
 
