@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
 import sys
 import typing
 
 
 def read_fragments(filename: str) -> str | None:
+    file_object: typing.IO[str] | None = None
     try:
-        file_object: typing.IO[str] = open(filename, "r")
+        file_object = open(filename, "r")
         fragments: str = file_object.read()
 
         print("---\n")
@@ -37,7 +39,7 @@ def change_fragments(fragments: str) -> str:
 
     print("---\n")
     print(new_fragments)
-    print("\n---")
+    print("---")
 
     return new_fragments
 
@@ -61,9 +63,8 @@ def main() -> None:
         return
 
     filename: str = sys.argv[1]
-    print(f"Accessing file '{filename}'")
-
     print("<=== Cyber Archives Recovery & Preservation ===>")
+    print(f"Accessing file '{filename}'")
 
     fragments: str | None = read_fragments(filename)
     if fragments is None:
