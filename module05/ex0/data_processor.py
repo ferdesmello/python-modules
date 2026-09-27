@@ -1,48 +1,65 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 import typing
 import abc
 
 
 class DataProcessor(abc):
-    def __init__(self, name):
-
     @abc.abstractmethod
     def validate(self, data: typing.Any) -> bool:
-        print(
+        pass
 
     @abc.abstractmethod
-    def ingest(self, data: Any) -> None:
-        df
+    def ingest(self, data: typing.Any) -> None:
+        pass
 
-    @abc.abstractmethod
     def output(self) -> tuple[int, str]:
-        dgd
-
-
+        pass
 
 
 class NumericProcessor(DataProcessor):
-  def __init__(self, name):
-    self.name = name
-    def show(self) -> None:
-        print(
+    def __init__(self, data: int | float | list[int | float]):
+        self.data = data
+
+    def validate(self, data: int | float | list[int | float]) -> bool:
+        pass
+
+    def ingest(self, data: int | float | list[int | float]) -> None:
+        pass
+
 
 
 class TextProcessor(DataProcessor):
+    def __init__(self, data: str | list[str]):
+        self.data = data
 
+    def validate(self, data: str | list[str]) -> bool:
+        try:
+            
 
-    def show(self) -> None:
-        print(
+    def ingest(self, data: str | list[str]) -> None:
+        pass
 
 
 class LogProcessor(DataProcessor):
+    def __init__(self, data):
+        self.data = data
 
-    def show(self) -> None:
-        print(
+    def validate(self, data: str | list[str]) -> bool:
+        pass
+
+    def ingest(self, data: str | list[str]) -> None:
+        pass
 
 
 def main() -> None:
+    print("=== Code Nexus - Data Processor ===")
+
+    print("Testing Numeric Processor...")
+
+    print("Testing Text Processor...")
+
+    print("Testing Log Processor...")
 
 
-if __main__ == "__main__":
+if __name__ == "__main__":
     main()
