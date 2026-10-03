@@ -159,8 +159,9 @@ def main() -> None:
             'log_message': 'Telnet access! Use ssh instead'
             },
             {
-                'log_level': 'INFO', 'log_message': 'User wil is connected'
-                }],
+            'log_level': 'INFO',
+            'log_message': 'User wil is connected'
+        }],
         42,
         ['Hi', 'five']
         ]
