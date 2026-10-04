@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-import typing
+from typing import Any
 import abc
 
 
 class DataProcessor(abc.ABC):
 
     def __init__(self) -> None:
-        self._values: list[tuple[int, str]] = []
         self._index: int = 0
+        self._values: list[tuple[int, str]] = []
 
     @abc.abstractmethod
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         pass
 
     @abc.abstractmethod
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -25,7 +25,7 @@ class DataProcessor(abc.ABC):
 
 class NumericProcessor(DataProcessor):
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)) and not isinstance(data, bool):
             return True
 
@@ -49,7 +49,7 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
 
@@ -70,8 +70,8 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: typing.Any) -> bool:
-        def is_valid_log_entry(entry: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
+        def is_valid_log_entry(entry: Any) -> bool:
             if not isinstance(entry, dict):
                 return False
             required_keys = {"log_level", "log_message"}
@@ -107,7 +107,7 @@ class DataStream():
     def register_processor(self, proc: DataProcessor) -> None:
         self._processors.append(proc)
 
-    def process_stream(self, stream: list[typing.Any]) -> None:
+    def process_stream(self, stream: list[Any]) -> None:
         for item in stream:
             accepted: bool = False
 
@@ -151,7 +151,7 @@ def main() -> None:
     print("Registering Numeric Processor\n")
     numeric = NumericProcessor()
 
-    data: list[typing.Any] = [
+    data: list[Any] = [
         'Hello world',
         [3.14, -1, 2.71],
         [{

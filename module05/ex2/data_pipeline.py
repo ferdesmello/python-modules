@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-import typing
+from typing import Any, Protocol
 import abc
 
 
 class DataProcessor(abc.ABC):
 
     def __init__(self) -> None:
-        self._values: list[tuple[int, str]] = []
         self._index: int = 0
+        self._values: list[tuple[int, str]] = []
 
     @abc.abstractmethod
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         pass
 
     @abc.abstractmethod
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -25,7 +25,7 @@ class DataProcessor(abc.ABC):
 
 class NumericProcessor(DataProcessor):
 
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)) and not isinstance(data, bool):
             return True
 
@@ -49,7 +49,7 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
-    def validate(self, data: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
 
@@ -70,8 +70,8 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: typing.Any) -> bool:
-        def is_valid_log_entry(entry: typing.Any) -> bool:
+    def validate(self, data: Any) -> bool:
+        def is_valid_log_entry(entry: Any) -> bool:
             if not isinstance(entry, dict):
                 return False
             required_keys = {"log_level", "log_message"}
@@ -100,7 +100,7 @@ class LogProcessor(DataProcessor):
             self._index += 1
 
 
-class ExportPlugin(typing.Protocol):
+class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         pass
 
@@ -124,7 +124,7 @@ class DataStream():
     def register_processor(self, proc: DataProcessor) -> None:
         self._processors.append(proc)
 
-    def process_stream(self, stream: list[typing.Any]) -> None:
+    def process_stream(self, stream: list[Any]) -> None:
         for item in stream:
             accepted: bool = False
 
@@ -160,6 +160,8 @@ class DataStream():
         for process in self._processors:
             extracted_data: list[tuple[int, str]] = []
 
+            if nb < 0:
+                nb = 0
             number: int = nb
             process_length: int = len(process._values)
             if process_length < nb:
@@ -191,7 +193,7 @@ def main() -> None:
     data_stream.register_processor(text)
     data_stream.register_processor(log)
 
-    data1: list[typing.Any] = [
+    data1: list[Any] = [
         'Hello world',
         [3.14, -1, 2.71],
         [{
@@ -215,7 +217,7 @@ def main() -> None:
 
     data_stream.print_processors_stats()
 
-    data2: list[typing.Any] = [
+    data2: list[Any] = [
         21,
         ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
         [{
