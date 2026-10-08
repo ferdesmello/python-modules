@@ -1,6 +1,6 @@
-#! /usr/bin/env python3
-import os
+#!/usr/bin/env python3
 import sys
+import os
 from dotenv import load_dotenv
 
 
@@ -19,7 +19,7 @@ def main() -> None:
         "API_KEY": api_key,
         "ZION_ENDPOINT": zion_endpoint
     }
-    missing = [key for key, val in required.items() if not val]
+    missing: list[str] = [key for key, val in required.items() if not val]
 
     if missing:
         print(f"WARNING/ERROR: Missing required configuration keys: "
@@ -37,8 +37,10 @@ def main() -> None:
         or "127.0.0.1" in db_url
     ):
         print("Database: Connected to local instance")
-    else:
+    elif db_url:
         print("Database: Connected to remote production instance")
+    else:
+        print("Database: [MISSING] No connection string provided")
 
     if api_key:
         status: str = ""
@@ -47,6 +49,8 @@ def main() -> None:
         elif matrix_mode == "development":
             status = "Authenticated"
         print(f"API Access: {status}")
+    else:
+        print("API Access: [MISSING] Unauthenticated")
 
     print(f"Log Level: {log_level}")
 
@@ -58,7 +62,7 @@ def main() -> None:
     print("\nEnvironment security check:")
     print("[OK] No hardcoded secrets detected")
 
-    env_exists = os.path.exists(".env")
+    env_exists: bool = os.path.exists(".env")
     if env_exists:
         print("[OK] .env file properly configured")
     else:
@@ -66,7 +70,7 @@ def main() -> None:
 
     if matrix_mode == "production":
         print("[OK] Running with Production overrides active")
-    elif matrix_mode == "development":
+    else:
         print("[OK] Production overrides available")
 
     print("\nThe Oracle sees all configurations.")

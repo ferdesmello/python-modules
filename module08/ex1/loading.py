@@ -1,14 +1,15 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
+import sys
 from importlib.metadata import version, PackageNotFoundError
 from importlib import import_module
-import sys
-#import requests
+
 
 packages: dict[str, str] = {
-    "numpy": "Numerical computation ready",
-    "pandas": "Data manipulation ready",
-    "matplotlib": "Visualization ready",
+    "numpy": "Numerical computation",
+    "pandas": "Data manipulation",
+    "matplotlib": "Visualization",
 }
+
 
 def check_dependency(package_name: str) -> tuple[bool, str]:
     try:
@@ -17,28 +18,34 @@ def check_dependency(package_name: str) -> tuple[bool, str]:
     except PackageNotFoundError:
         return (False, "Not installed")
 
+
 def verify_environment() -> bool:
     print("LOADING STATUS: Loading programs...\n")
     print("Checking dependencies:")
 
     all_ok: bool = True
-    for package, purpose in packages.items():
+    for package, message in packages.items():
         installed, ver = check_dependency(package)
         if installed:
-            print(f"[OK] {package} ({ver}) - {purpose}")
+            print(f"[OK] {package} ({ver}) - {message} ready")
         else:
-            print(f"[MISSING] {package} - {purpose}")
+            print(f"[MISSING] {package} - {message}")
             all_ok = False
 
     if not all_ok:
         print("\nERROR: Missing required dependencies!")
         print("\nTo install via pip, run:")
+        print(" python -m venv matrix_env")
+        print(" source matrix_env/bin/activate")
         print("  pip install -r requirements.txt")
         print("\nTo install via Poetry, run:")
+        print(" 'poetry config virtualenvs.create false'")
         print("  poetry install")
+        print("  poetry run python *.py")
         return False
 
     return True
+
 
 def analysis() -> None:
     np = import_module("numpy")
@@ -55,9 +62,9 @@ def analysis() -> None:
 
     print("Generating visualization...")
     plt.figure(figsize=(8, 4))
-    plt.plot(df["time"], 
-             df["signal"], 
-             label="Matrix Signal", 
+    plt.plot(df["time"],
+             df["signal"],
+             label="Matrix Signal",
              color="#00FF00",
              linewidth=1)
     plt.title("Matrix Data Analysis")
@@ -70,6 +77,7 @@ def analysis() -> None:
 
     print("\nAnalysis complete!")
     print("Results saved to: matrix_analysis.png")
+
 
 def main() -> None:
     if not verify_environment():

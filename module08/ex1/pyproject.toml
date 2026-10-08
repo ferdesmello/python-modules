@@ -2,7 +2,7 @@
 name = "loading"
 version = "0.1.0"
 description = "Matrix loading program for ex1"
-authors = ["Fernando Mello <email>"]
+authors = ["Fernando Mello <ferde-so@student.42sp.org.br>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"

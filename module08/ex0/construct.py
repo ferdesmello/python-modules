@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 import sys
 import os
 import site
@@ -32,7 +32,7 @@ def main() -> None:
 
     else:
         print("MATRIX STATUS: Welcome to the construct\n")
-        
+
         print(f"Current Python: {sys.executable}")
         env_name: str = os.path.basename(env_prefix)
         print(f"Virtual Environment: {env_name}")
