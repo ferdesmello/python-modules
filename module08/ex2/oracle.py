@@ -1,16 +1,12 @@
-#!/usr/bin/env python3
-import sys
-<<<<<<< HEAD
+#! /usr/bin/env python3
 import os
-from dotenv import load_dotenv
-=======
+import sys
 
 try:
     from dotenv import load_dotenv
     loaded_dotenv: bool = True
 except ImportError:
     loaded_dotenv = False
->>>>>>> 0d4e642 (ajustes finais)
 
 
 def main() -> None:
@@ -35,7 +31,7 @@ def main() -> None:
         "API_KEY": api_key,
         "ZION_ENDPOINT": zion_endpoint
     }
-    missing: list[str] = [key for key, val in required.items() if not val]
+    missing = [key for key, val in required.items() if not val]
 
     if missing:
         print(f"WARNING/ERROR: Missing required configuration keys: "
@@ -56,10 +52,8 @@ def main() -> None:
         or "127.0.0.1" in db_url
     ):
         print("Database: Connected to local instance")
-    elif db_url:
-        print("Database: Connected to remote production instance")
     else:
-        print("Database: [MISSING] No connection string provided")
+        print("Database: Connected to remote production instance")
 
     if api_key:
         status: str = "Authenticated"
@@ -68,8 +62,6 @@ def main() -> None:
         elif not api_key:
             status = "Not Authenticated"
         print(f"API Access: {status}")
-    else:
-        print("API Access: [MISSING] Unauthenticated")
 
     print(f"Log Level: {log_level}")
 
@@ -87,19 +79,13 @@ def main() -> None:
         else:
             print("[OK] No hardcoded secrets detected")
 
-    env_exists: bool = os.path.exists(".env")
+    env_exists = os.path.exists(".env")
     if env_exists:
         print("[OK] .env file properly configured")
     else:
         print("[WARNING] .env file not found (using system environment)")
 
-<<<<<<< HEAD
-    if matrix_mode == "production":
-        print("[OK] Running with Production overrides active")
-    else:
-=======
     if any([matrix_mode, db_url, api_key, log_level, zion_endpoint]):
->>>>>>> 0d4e642 (ajustes finais)
         print("[OK] Production overrides available")
     else:
         print("[INFO] Environment variable override not active")
