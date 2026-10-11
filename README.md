@@ -1,4 +1,4 @@
-# python-modules
+# Python Modules
 Introduction to Python programming over _many_ modules.
 
 | Module | Title | Theme | Topics |
