@@ -4,6 +4,10 @@ from ex1.capabilities import HealCapability, TransformCapability
 from typing import cast
 
 
+class InvalidStrategyError(Exception):
+    pass
+
+
 class BattleStrategy(ABC):
     @abstractmethod
     def is_valid(self, creature: Creature) -> bool:
@@ -20,7 +24,7 @@ class NormalStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> str:
         if not self.is_valid(creature):
-            raise Exception(
+            raise InvalidStrategyError(
                 f"Invalid Creature '{creature.creature_name}' "
                 "for this normal strategy"
             )
@@ -33,7 +37,7 @@ class AggressiveStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> str:
         if not self.is_valid(creature):
-            raise Exception(
+            raise InvalidStrategyError(
                 f"Invalid Creature '{creature.creature_name}' "
                 "for this aggressive strategy"
             )
@@ -48,7 +52,7 @@ class DefensiveStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> str:
         if not self.is_valid(creature):
-            raise Exception(
+            raise InvalidStrategyError(
                 f"Invalid Creature '{creature.creature_name}' "
                 f"for this defensive strategy"
             )

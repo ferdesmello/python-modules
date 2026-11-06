@@ -34,7 +34,7 @@ class Shiftling(Creature, TransformCapability):
     def attack(self) -> str:
         if self._is_transformed:
             return (f"{self.creature_name} performs a boosted strike!")
-        return (f"{self.creature_name} attacks normally!")
+        return (f"{self.creature_name} attacks normally.")
 
     def transform(self) -> str:
         self._is_transformed = True
@@ -56,7 +56,7 @@ class Morphagon(Creature, TransformCapability):
                 f"{self.creature_name} unleashes a "
                 "devastating morph strike!"
             )
-        return (f"{self.creature_name} attacks normally!")
+        return (f"{self.creature_name} attacks normally.")
 
     def transform(self) -> str:
         self._is_transformed = True
