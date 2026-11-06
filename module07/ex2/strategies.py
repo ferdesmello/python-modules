@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
 from ex0.creatures import Creature
 from ex1.capabilities import HealCapability, TransformCapability
-
-
-class InvalidStrategyError(Exception):
-    pass
+from typing import cast
 
 
 class BattleStrategy(ABC):
@@ -13,49 +10,47 @@ class BattleStrategy(ABC):
         pass
 
     @abstractmethod
-    def act(self, creature: Creature) -> None:
+    def act(self, creature: Creature) -> str:
         pass
 
 
 class NormalStrategy(BattleStrategy):
     def is_valid(self, creature: Creature) -> bool:
-        return isinstance(creature, Creature)
+        return (isinstance(creature, Creature))
 
-    def act(self, creature: Creature) -> None:
+    def act(self, creature: Creature) -> str:
         if not self.is_valid(creature):
-            raise InvalidStrategyError(
+            raise Exception(
                 f"Invalid Creature '{creature.creature_name}' "
                 "for this normal strategy"
             )
-        print(creature.attack())
+        return (creature.attack())
 
 
 class AggressiveStrategy(BattleStrategy):
     def is_valid(self, creature: Creature) -> bool:
-        return isinstance(creature, TransformCapability)
+        return (isinstance(creature, TransformCapability))
 
-    def act(self, creature: Creature) -> None:
+    def act(self, creature: Creature) -> str:
         if not self.is_valid(creature):
-            raise InvalidStrategyError(
+            raise Exception(
                 f"Invalid Creature '{creature.creature_name}' "
                 "for this aggressive strategy"
             )
-        if isinstance(creature, TransformCapability):
-            print(creature.transform())
-            print(creature.attack())
-            print(creature.revert())
+        return (cast(TransformCapability, creature).transform() + "\n"
+                + creature.attack() + "\n"
+                + cast(TransformCapability, creature).revert())
 
 
 class DefensiveStrategy(BattleStrategy):
     def is_valid(self, creature: Creature) -> bool:
-        return isinstance(creature, HealCapability)
+        return (isinstance(creature, HealCapability))
 
-    def act(self, creature: Creature) -> None:
+    def act(self, creature: Creature) -> str:
         if not self.is_valid(creature):
-            raise InvalidStrategyError(
+            raise Exception(
                 f"Invalid Creature '{creature.creature_name}' "
                 f"for this defensive strategy"
             )
-        print(creature.attack())
-        if isinstance(creature, HealCapability):
-            print(creature.heal())
+        return (creature.attack() + "\n"
+                + cast(HealCapability, creature).heal())

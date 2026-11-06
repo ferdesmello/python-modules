@@ -13,7 +13,7 @@ class CreatureFactory(ABC):
         pass
 
 
-class FireCreatureFactory(CreatureFactory):
+class FlameFactory(CreatureFactory):
     def create_base(self) -> Creature:
         return Flameling()
 
@@ -21,7 +21,7 @@ class FireCreatureFactory(CreatureFactory):
         return Pyrodon()
 
 
-class WaterCreatureFactory(CreatureFactory):
+class AquaFactory(CreatureFactory):
     def create_base(self) -> Creature:
         return Aquabub()
 

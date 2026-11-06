@@ -1,18 +1,18 @@
 #! /usr/bin/env python3
 
 from typing import List, Tuple
-from ex0 import CreatureFactory, FireCreatureFactory, WaterCreatureFactory
+from ex0 import CreatureFactory, FlameFactory, AquaFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import (
     BattleStrategy,
     NormalStrategy,
     AggressiveStrategy,
-    DefensiveStrategy,
-    InvalidStrategyError,
+    DefensiveStrategy
 )
 
 
 Opponent = Tuple[CreatureFactory, BattleStrategy]
+
 
 def battle(opponents: List[Opponent]) -> None:
     """Organize tournament fights between opponents."""
@@ -34,17 +34,17 @@ def battle(opponents: List[Opponent]) -> None:
             print(" now fight!")
 
             try:
-                s1.act(c1)
-                s2.act(c2)
-            except InvalidStrategyError as e:
+                print(s1.act(c1))
+                print(s2.act(c2))
+            except Exception as e:
                 print(f"Battle error, aborting tournament: {e}")
                 return
 
 
 def main() -> None:
     """Run all Exercise 2 tournament tests."""
-    fire_factory = FireCreatureFactory()
-    water_factory = WaterCreatureFactory()
+    flame_factory = FlameFactory()
+    aqua_factory = AquaFactory()
     healing_factory = HealingCreatureFactory()
     transform_factory = TransformCreatureFactory()
 
@@ -54,19 +54,19 @@ def main() -> None:
 
     print("Tournament 0 (basic)")
     print(" [ (Flameling+Normal), (Healing+Defensive) ]")
-    battle([(fire_factory, normal_strat), (healing_factory, defensive_strat)])
+    battle([(flame_factory, normal_strat), (healing_factory, defensive_strat)])
 
     print("\nTournament 1 (error)")
     print(" [ (Flameling+Aggressive), (Healing+Defensive) ]")
     battle(
-        [(fire_factory, aggressive_strat), (healing_factory, defensive_strat)]
+        [(flame_factory, aggressive_strat), (healing_factory, defensive_strat)]
     )
 
     print("\nTournament 2 (multiple)")
     print(" [ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
     battle(
         [
-            (water_factory, normal_strat),
+            (aqua_factory, normal_strat),
             (healing_factory, defensive_strat),
             (transform_factory, aggressive_strat),
         ]

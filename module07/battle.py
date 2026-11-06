@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from ex0 import CreatureFactory, FireCreatureFactory, WaterCreatureFactory
+from ex0 import CreatureFactory, FlameFactory, AquaFactory
 
 
 def test_factory(factory: CreatureFactory) -> None:
@@ -14,9 +14,9 @@ def test_factory(factory: CreatureFactory) -> None:
 
 
 def test_battle(
-        factory1: CreatureFactory, 
+        factory1: CreatureFactory,
         factory2: CreatureFactory
-    ) -> None:
+        ) -> None:
     creature1 = factory1.create_base()
     creature2 = factory2.create_base()
 
@@ -31,15 +31,15 @@ def test_battle(
 
 def main() -> None:
     print("Testing factory")
-    test_factory(FireCreatureFactory())
+    test_factory(FlameFactory())
 
     print()
     print("Testing factory")
-    test_factory(WaterCreatureFactory())
+    test_factory(AquaFactory())
 
     print()
     print("Testing battle")
-    test_battle(FireCreatureFactory(), WaterCreatureFactory())
+    test_battle(FlameFactory(), AquaFactory())
 
 
 if __name__ == "__main__":

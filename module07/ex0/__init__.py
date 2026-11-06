@@ -1,11 +1,11 @@
 from .factories import (
     CreatureFactory,
-    FireCreatureFactory,
-    WaterCreatureFactory
+    FlameFactory,
+    AquaFactory
     )
 
 __all__ = [
     "CreatureFactory",
-    "FireCreatureFactory",
-    "WaterCreatureFactory"
+    "FlameFactory",
+    "AquaFactory"
     ]

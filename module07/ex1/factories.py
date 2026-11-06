@@ -1,5 +1,4 @@
-from ex0.creatures import Creature
-from ex0.factories import CreatureFactory
+from ex0.factories import CreatureFactory, Creature
 from .creatures import Sproutling, Bloomelle, Shiftling, Morphagon
 
 
