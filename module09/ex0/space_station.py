@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pydantic import BaseModel, Field, ValidationError
 from typing import Optional
 from datetime import datetime
@@ -14,7 +16,7 @@ class SpaceStation(BaseModel):
     notes: Optional[str] = Field(default=None, max_length=200)
 
 
-def main():
+def main() -> None:
     print("Space Station Data Validation")
     print("=======================================")
     print("Valid station created:")
@@ -26,19 +28,24 @@ def main():
             crew_size=6,
             power_level=85.5,
             oxygen_level=92.3,
-            last_maintenance="2026-11-05T05:15:00",
+            last_maintenance=datetime.strptime("2026-11-05T05:15:00",
+                                               "%Y-%m-%dT%H:%M:%S"),
             is_operational=True,
-            notes="Operational"
+            notes="Text"
         )
         print(f"ID: {station1.station_id}")
         print(f"Name: {station1.name}")
         print(f"Crew: {station1.crew_size} people")
         print(f"Power: {station1.power_level}%")
         print(f"Oxygen: {station1.oxygen_level}%")
-        print(f"Status: {station1.is_operational}")
-        print(f"Notes: {station1.notes}")
+        if station1.is_operational:
+            print("Status: Operational")
+        else:
+            print("Status: Not Operational")
+
     except ValidationError as e:
-        print("Error creating station1:", e)
+        for error in e.errors():
+            print(error["msg"])
 
     print()
     print("========================================")
@@ -51,9 +58,10 @@ def main():
             crew_size=25,
             power_level=85.5,
             oxygen_level=92.3,
-            last_maintenance="2026-11-05T05:15:00",
+            last_maintenance=datetime.strptime("2026-11-05T05:15:00",
+                                               "%Y-%m-%dT%H:%M:%S"),
             is_operational=True,
-            notes="Operational"
+            notes="Text"
         )
         print("Valid station created:")
         print(f"ID: {station2.station_id}")
@@ -61,12 +69,13 @@ def main():
         print(f"Crew: {station2.crew_size} people")
         print(f"Power: {station2.power_level}%")
         print(f"Oxygen: {station2.oxygen_level}%")
-        print(f"Status: {station2.is_operational}")
-        print(f"Notes: {station2.notes}")
+        if station2.is_operational:
+            print("Status: Operational")
+        else:
+            print("Status: Not Operational")
     except ValidationError as e:
         for error in e.errors():
             print(error["msg"])
-        print(e.errors()[0]["msg"])
 
 
 if __name__ == "__main__":
