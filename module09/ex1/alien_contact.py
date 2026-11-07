@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import Enum
 
 
-class ContactType(str, Enum):
+class ContactType(Enum):
     RADIO = "radio"
     VISUAL = "visual"
     PHYSICAL = "physical"
@@ -77,7 +77,7 @@ def main() -> None:
         print(f"Signal: {contact1.signal_strength}/10")
         print(f"Duration: {contact1.duration_minutes} minutes")
         print(f"Witnesses: {contact1.witness_count}")
-        print(f"Message: {contact1.message_received}")
+        print(f"Message: '{contact1.message_received}'")
     except ValidationError as e:
         for error in e.errors():
             print(error["msg"])
@@ -104,6 +104,7 @@ def main() -> None:
         print(f"Signal: {contact2.signal_strength}/10")
         print(f"Duration: {contact2.duration_minutes} minutes")
         print(f"Witnesses: {contact2.witness_count}")
+        print(f"Message: '{contact2.message_received}'")
     except ValidationError as e:
         for error in e.errors():
             print(error["msg"])

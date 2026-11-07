@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import Enum
 
 
-class CrewRanks(str, Enum):
+class CrewRanks(Enum):
     CADET = "cadet"
     OFFICER = "officer"
     LIEUTENANT = "lieutenant"
@@ -41,14 +41,15 @@ class SpaceMission(BaseModel):
 
         has_leader: bool = any(
             member.rank in [CrewRanks.CAPTAIN, CrewRanks.COMMANDER]
-            for member in self.crew)
+            for member in self.crew
+            )
         if (not has_leader):
             raise ValueError(
                 "Mission must have at least one Commander or Captain"
             )
 
         if (self.duration_days > 365):
-            half: int = (len(self.crew) + 1) // 2
+            half: float = len(self.crew) / 2
             experienced_crew_count: int = len(
                 [member for member in self.crew
                  if member.years_experience >= 5])

@@ -18,7 +18,7 @@ class SpaceStation(BaseModel):
 
 def main() -> None:
     print("Space Station Data Validation")
-    print("=======================================")
+    print("========================================")
     print("Valid station created:")
 
     try:
